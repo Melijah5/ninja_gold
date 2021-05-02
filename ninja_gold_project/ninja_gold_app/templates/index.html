@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ninja Gold</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="jumbotron bg-success">
+
+        <h1>Ninja Gold</h1>
+        <p>The ninja can go to different places (farm, cave, house, casino) and earn different amounts of gold.</p>
+        <p> In the case of a casino, your ninja can earn or lose up to 50 gold.</p>
+
+    </div>
+    <div class="container">
+        <div class="col-3 mt-4">
+            <div class="form-outline ">
+                <textarea rows="1 " class="form-control " placeholder="Random word " readonly>Your Gold: {{request.session.count }}</textarea>
+                <button type="submit " class="btn btn-danger mt-4 "><a href="/reset">RESET</a></button>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <form action="/add-money" method="post" class="col-sm-3 ">
+                {% csrf_token %}
+                <div class="card" style="width:400px">
+                    <div class="card-body">
+                        <h4 class="card-title">Farm</h4>
+                        <input type="hidden" name="farm">(earns 10-20 golds)</input>
+                        <input type="submit" value="find gold" href="#" class="btn btn-primary"></input>
+                    </div>
+                </div>
+            </form>
+
+            <form action="/add-money" method="post" class="col-sm-3">
+                <div class="card" style="width:400px">
+                    {% csrf_token %}
+                    <div class="card-body">
+                        <h4 class="card-title">Cave</h4>
+                        <input type="hidden" name="cave">(earns 5-10 golds)</input>
+                        <input type="submit" value="find gold" href="#" class="btn btn-primary"></input>
+                    </div>
+                </div>
+            </form>
+
+            <form action="/add-money" method="post" class="col-sm-3 ">
+                <div class="card" style="width:400px">
+                    {% csrf_token %}
+                    <div class="card-body">
+                        <h4 class="card-title">House</h4>
+                        <input type="hidden" name="house">(earns 2-5 golds)</input>
+                        <input type="submit" value="find gold" href="#" class="btn btn-primary"></input>
+                    </div>
+                </div>
+            </form>
+
+            <form action="/add-money" method="post" class="col-sm-3">
+                <div class="card" style="width:400px">
+                    {% csrf_token %}
+                    <div class="card-body">
+                        <h4 class="card-title">Casino</h4>
+                        <input type="hidden" name="casino">(earns/takes 0-50 golds)</input>
+                        <input type="submit" value="find gold" href="#" class="btn btn-primary"></input>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="container">
+            <div class="wrapper"><label>Activites</label>
+                <div class="form-group">
+
+
+                    {% for activity in request.session.activities %} {% if activity.result == 'win' %}
+                    <h6 class='green'> Earned {{ activity.amount }} golds from the {{ activity.name }}! ({{ activity.timestamp}})
+                    </h6>
+                    {% else %}
+                    <h6 class='red'> Earned {{ activity.amount }} golds from the {{ activity.name }}! ({{ activity.timestamp}})
+                    </h6>
+                    {% endif %} {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="jumbotron bg-success"></div>
+    </footer>
+</body>
+
+</html>
+
+
+</html>

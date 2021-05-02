@@ -1,0 +1,32 @@
+.jumbotron {
+    height: 200px;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    background-color: rgb(218, 196, 170);
+}
+
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
+}
+
+
+/* form {
+    display: inline-block;
+    margin-left: 30px;
+    border: 2px solid black;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+} */
+
+.form-group {
+    height: 250px;
+    width: 100%;
+    border: 2px solid black;
+    overflow: scroll;
+    padding: 15px;
+}
